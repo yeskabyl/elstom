@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-cormorant);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+
+  /* Brand */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-teal: var(--teal);
+  --color-aqua: var(--aqua);
+  --color-aqua-soft: var(--aqua-soft);
+  --color-mist: var(--mist);
+  --color-cream: var(--cream);
+  --color-star: var(--star);
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  --shadow-soft: 0 1px 2px rgb(14 44 53 / 0.04), 0 10px 30px -12px rgb(14 44 53 / 0.1);
+  --shadow-lift: 0 2px 6px rgb(14 44 53 / 0.05), 0 28px 60px -24px rgb(14 44 53 / 0.22);
+
+  --animate-accordion-down: accordion-down 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--accordion-panel-height, auto); }
+  }
+  @keyframes accordion-up {
+    from { height: var(--accordion-panel-height, auto); }
+    to { height: 0; }
+  }
+}
+
+:root {
+  /* Brand palette — deep teal-navy, soft turquoise, warm white */
+  --ink: #0e2c35;
+  --ink-soft: #1a4450;
+  --teal: #1b746e; /* accent for text & icons — 5.4:1 on white */
+  --aqua: #74c7bd; /* decorative turquoise — never for text */
+  --aqua-soft: #e2f2ef;
+  --mist: #f1f3f1; /* light-gray section background */
+  --cream: #fbfaf7; /* warm white page background */
+  --star: #d99a1e;
+
+  --background: var(--cream);
+  --foreground: #172a30;
+  --card: #ffffff;
+  --muted: var(--mist);
+  --muted-foreground: #56656a;
+  --border: #e3e5e0;
+  --input: #d6dad5;
+  --ring: #1b746e;
+  --destructive: #b42318;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth font-sans;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Cormorant defaults to old-style figures («1» reads as «I») */
+  .font-display {
+    font-variant-numeric: lining-nums;
+  }
+  ::selection {
+    background: var(--aqua-soft);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  /* Sections focused programmatically after in-page navigation */
+  section[tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 78rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Large editorial serif headings */
+@utility heading-display {
+  font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  color: var(--ink);
+}
+
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
